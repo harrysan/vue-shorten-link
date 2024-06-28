@@ -6,7 +6,7 @@ API short links using https://shrtlnk.dev/developer/documentation
 
 API for Send Email using https://www.emailjs.com/ ( binding with mailtrap, need to register in Email Service first ! )
 
-For demo : https://vue3shortenlink.netlify.app/feedback
+For demo : https://vue3shortenlink.netlify.app
 
 ## Project setup
 
