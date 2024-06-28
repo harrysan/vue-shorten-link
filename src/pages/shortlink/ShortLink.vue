@@ -11,14 +11,13 @@
 </template>
 
 <script>
-import BaseCard from "@/components/ui/BaseCard.vue";
 import InputForm from "../../components/layout/InputForm.vue";
 import TheResult from "../../components/layout/TheResult.vue";
 
 import { reactive } from "vue";
 
 export default {
-  components: { BaseCard, TheResult, InputForm },
+  components: { TheResult, InputForm },
   setup() {
     const responseReturn = reactive({
       originalUrl: "",
@@ -38,7 +37,7 @@ export default {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            "api-key": "F4OaYqRoluRyEjNrp1rANKSOl8j8j0R1OAU3F35nnF2nd",
+            "api-key": process.env.VUE_APP_API_KEY,
           },
         });
 

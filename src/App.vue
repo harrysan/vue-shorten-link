@@ -28,5 +28,5 @@ body {
 }
 </style>
 
-// TODO: fix input bar when url is too long // TODO: add transition // TODO:
-change base color // TODO: add feedback page
+TODO: add transition // TODO:
+change base color // TODO: feedback email not working // TODO: add readme md to create env file // TODO: clear input afer generate // TODO: env file after 1st line not work
