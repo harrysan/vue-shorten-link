@@ -1,0 +1,7 @@
+VUE_APP_API_KEY = yours - here;
+VUE_APP_SERVICEID = yours - here;
+VUE_APP_TEMPLATEID = yours - here;
+VUE_APP_PUBLICKEY = yours - here;
+VUE_APP_PRIVATEKEY = yours - here;
+
+// rename the file to .env !!

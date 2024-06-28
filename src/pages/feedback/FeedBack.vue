@@ -23,83 +23,61 @@
         </div>
         <base-button>Send</base-button>
       </form>
+      <div class="response" v-if="isSend">
+        Message successfuly send. Thanks for your feedback :) !
+      </div>
     </base-card>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 
 export default {
   setup() {
     const name = ref("");
     const message = ref("");
+    const isSend = ref(false);
 
     async function sendEmail() {
-      // code fragment
-      // var data = {
-      //   service_id: process.env.VUE_APP_SERVICE_ID,
-      //   template_id: process.env.VUE_APP_TEMPLATE_ID,
-      //   user_id: process.env.VUE_APP_PUBLIC_KEY,
-      //   // accessToken: process.env.VUE_APP_PRIVATE_KEY,
-      //   template_params: {
-      //     username: "James",
-      //     "g-recaptcha-response": "03AHJ_ASjnLA214KSNKFJAK12sfKASfehbmfd...",
-      //   },
-      // };
-
-      var templateParams = {
-        name: name.value,
+      var template_params = {
+        from_name: name.value,
         message: message.value,
+        to_name: "Admin",
       };
 
-      console.log(process.env.VUE_APP_PUBLICKEY);
+      var data = {
+        service_id: process.env.VUE_APP_SERVICEID,
+        template_id: process.env.VUE_APP_TEMPLATEID,
+        user_id: process.env.VUE_APP_PUBLICKEY,
+        template_params: template_params,
+        accessToken: process.env.VUE_APP_PRIVATEKEY,
+      };
 
-      const info = emailjs.init({
-        publicKey: process.env.VUE_APP_PUBLIC_KEY,
-      });
-      console.log(info);
-
-      await emailjs
-        .send(
-          process.env.VUE_APP_SERVICE_ID,
-          process.env.VUE_APP_TEMPLATE_ID,
-          templateParams
-        )
-        .then(
-          (response) => {
-            console.log("SUCCESS!", response.status, response.text);
+      try {
+        await fetch(`https://api.emailjs.com/api/v1.0/email/send`, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
-          (error) => {
-            console.log("FAILED...", error);
-          }
-        );
+        });
 
-      // const response = await fetch(
-      //   `https://api.emailjs.com/api/v1.0/email/send`,
-      //   {
-      //     method: "POST",
-      //     body: JSON.stringify(data),
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Accept: "application/json",
-      //     },
-      //   }
-      // );
+        isSend.value = true;
+        setTimeout(() => {
+          isSend.value = false;
+        }, 3000);
 
-      // const responseData = await response.json();
-      // if (!response.ok) {
-      //   const error = new Error(
-      //     responseData.message || "Failed to send request."
-      //   );
-      //   throw error;
-      // }
-
-      // console.log(responseData);
+        name.value = "";
+        message.value = "";
+      } catch (error) {
+        console.log(error);
+      }
     }
 
-    return { name, message, sendEmail };
+    return { name, message, sendEmail, isSend };
   },
 };
 </script>
@@ -129,5 +107,9 @@ textarea:focus {
   background-color: #f2f0f5;
   outline: none;
   border-color: #3d008d;
+}
+
+.response {
+  margin-top: 1rem;
 }
 </style>

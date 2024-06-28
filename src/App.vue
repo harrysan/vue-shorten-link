@@ -1,6 +1,12 @@
 <template>
   <the-header></the-header>
-  <router-view></router-view>
+  <router-view v-slot="{ Component }">
+    <transition name="route" mode="out-in">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </transition>
+  </router-view>
 </template>
 
 <script>
@@ -26,7 +32,28 @@ html {
 body {
   margin: 0;
 }
-</style>
 
-TODO: add transition // TODO:
-change base color // TODO: feedback email not working // TODO: add readme md to create env file // TODO: clear input afer generate // TODO: env file after 1st line not work
+.route-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.route-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.route-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.route-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.route-enter-to,
+.route-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>

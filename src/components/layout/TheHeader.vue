@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav>
-      <h2><router-link to="/"> Shorten Link</router-link></h2>
+      <h2><router-link to="/shorten"> Shorten Link</router-link></h2>
       <h2><router-link to="feedback">Feedback</router-link></h2>
     </nav>
   </header>
@@ -24,8 +24,8 @@ header {
 header a {
   text-decoration: none;
   display: inline-block;
-  background-color: goldenrod;
-  padding: 0.75rem 1.5rem;
+  /* background-color: goldenrod; */
+  padding: 0.5rem 1rem;
   border: 1px solid transparent;
 }
 
@@ -34,6 +34,10 @@ a:hover,
 a.router-link-active {
   border: 1px solid #f391e3;
 } */
+
+.router-link-active {
+  background-color: rgb(236, 206, 128);
+}
 
 h2 {
   margin: 0;
